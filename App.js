@@ -1,12 +1,20 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Header from './src/components/Header';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
+
+grey = '#89909A';
 
 const App = () => {
   return (
     <View style={styles.container}>
       <Header text="Home" />
-      <View style={styles.footer}><Text>Footer</Text></View>
+      <View style={styles.footer}>
+        <FontAwesomeIcon icon={faHome} size={24} style={styles.icon} />
+        <FontAwesomeIcon icon={faPoll} size={24} style={styles.icon} />
+        <FontAwesomeIcon icon={faUser} size={24} style={styles.icon} />
+      </View>
     </View>
   );
 };
@@ -29,6 +37,14 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
 
     elevation: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 60,
+    paddingBottom: 20,
+  },
+  icon: {
+    color: grey,
   },
 });
 
