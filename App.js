@@ -5,15 +5,30 @@ import NavigationIcon from './src/components/NavigationIcon';
 import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
 const Layout = ({screenName}) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Header text={screenName} />
       <View style={styles.footer}>
-        <NavigationIcon icon={faHome} isActive />
-        <NavigationIcon icon={faPoll} />
-        <NavigationIcon icon={faUser} />
+        <NavigationIcon
+          icon={faHome}
+          onPress={() => navigation.navigate('Home')}
+          isActive={screenName === 'Home'}
+        />
+        <NavigationIcon
+          icon={faPoll}
+          onPress={() => navigation.navigate('Trends')}
+          isActive={screenName === 'Trends'}
+        />
+        <NavigationIcon
+          icon={faUser}
+          onPress={() => navigation.navigate('Profile')}
+          isActive={screenName === 'Profile'}
+        />
       </View>
     </View>
   );
