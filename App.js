@@ -4,8 +4,30 @@ import Header from './src/components/Header';
 import NavigationIcon from './src/components/NavigationIcon';
 import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
+
+const TabBar = ({navigation, state}) => {
+  ICONS = {
+    Home: faHome,
+    Trends: faPoll,
+    Profile: faUser,
+  };
+  return (
+    <View style={styles.footer}>
+      {state.routeNames.map((routeName, index) => {
+        return (
+          <NavigationIcon
+            key={routeName}
+            icon={ICONS[routeName]}
+            onPress={() => navigation.navigate(routeName)}
+            isActive={index === state.index}
+          />
+        );
+      })}
+    </View>
+  );
+};
 
 const Layout = ({screenName}) => {
   const navigation = useNavigation();
@@ -13,23 +35,6 @@ const Layout = ({screenName}) => {
   return (
     <View style={styles.container}>
       <Header text={screenName} />
-      <View style={styles.footer}>
-        <NavigationIcon
-          icon={faHome}
-          onPress={() => navigation.navigate('Home')}
-          isActive={screenName === 'Home'}
-        />
-        <NavigationIcon
-          icon={faPoll}
-          onPress={() => navigation.navigate('Trends')}
-          isActive={screenName === 'Trends'}
-        />
-        <NavigationIcon
-          icon={faUser}
-          onPress={() => navigation.navigate('Profile')}
-          isActive={screenName === 'Profile'}
-        />
-      </View>
     </View>
   );
 };
@@ -38,18 +43,19 @@ const HomeScreen = () => <Layout screenName="Home" />;
 const TrendsScreen = () => <Layout screenName="Trends" />;
 const ProfileScreen = () => <Layout screenName="Profile" />;
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <Tab.Navigator
         initialRouteName="Home"
+        tabBar={TabBar}
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Trends" component={TrendsScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Trends" component={TrendsScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
