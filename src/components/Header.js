@@ -6,7 +6,11 @@ const Header = ({text}) => {
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/background.png')}
-        style={styles.image}></ImageBackground>
+        style={styles.image}>
+        <View>
+          <Text style={styles.text}>{text}</Text>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -19,6 +23,12 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     paddingTop: 100,
+  },
+  text: {
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25,
   },
 });
 

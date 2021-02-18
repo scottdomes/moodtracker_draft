@@ -12,9 +12,7 @@ const Screen = ({name, children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: -20,
-    zIndex: 9999,
-    position: 'absolute'
+
   },
   text: {
     textAlign: 'center',

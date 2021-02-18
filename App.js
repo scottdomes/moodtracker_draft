@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import Header from './src/components/Header';
 import NavigationIcon from './src/components/NavigationIcon';
 import Screen from './src/components/Screen';
 import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const TabBar = ({navigation, state}) => {
   ICONS = {
@@ -29,22 +30,45 @@ const TabBar = ({navigation, state}) => {
   );
 };
 
-const HomeScreen = () => <Screen name="Home" />;
+const HomeScreen = () => <Text>Hello</Text>;
 const TrendsScreen = () => <Screen name="Trends" />;
 const ProfileScreen = () => <Screen name="Profile" />;
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const MainScreen = () => {
+  return (
+    <Tab.Navigator initialRouteName="Home" tabBar={TabBar}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Trends" component={TrendsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Header />
       <NavigationContainer>
-        <Tab.Navigator initialRouteName="Home" tabBar={TabBar}>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Trends" component={TrendsScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
-        </Tab.Navigator>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{
+              headerStyle: {
+                height: 250,
+              },
+              headerBackground: () => (
+                <View>
+                  <Image
+                    source={require('./src/img/background.png')}
+                    style={styles.image}></Image>
+                </View>
+              ),
+            }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </View>
   );
@@ -72,6 +96,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 60,
     paddingBottom: 20,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 
