@@ -1,35 +1,25 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-  Button,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, StatusBar, Button} from 'react-native';
 
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          contentContainerStyle={styles.scrollView}>
-          <Button title="Log in" />
-          <Button title="Sign up" />
-          <Button title="Log out" />
-        </ScrollView>
-      </SafeAreaView>
+      <View style={styles.scrollView}>
+        <Button title="Log in" />
+        <Button title="Sign up" />
+        <Button title="Log out" />
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1, 
+    flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default App;
