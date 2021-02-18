@@ -10,10 +10,10 @@ const Card = ({containerStyles, children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
     borderRadius: 20,
     ...basic,
+    padding: 20,
   },
 });
 
