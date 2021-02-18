@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
-import {darkPurple, lightGrey} from '../styles/colors';
+import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
 import {
   faLaughSquint,
   faSmile,
@@ -25,20 +25,38 @@ const EMOTION_ICONS = {
 };
 
 const Home = () => {
+  const [currentEmotion, setEmotion] = useState(null);
   return (
     <Card>
       <Text style={styles.greeting}>How are you today?</Text>
       <View style={styles.emotionsContainer}>
         {Object.keys(EMOTIONS).map((emotion) => {
+          const isActive = currentEmotion === emotion;
           return (
-            <View style={styles.emotion}>
-              <FontAwesomeIcon
-                icon={EMOTION_ICONS[emotion]}
-                size={70}
-                style={styles.emotionIcon}
-              />
-              <Text style={styles.emotionLabel}>{emotion}</Text>
-            </View>
+            <TouchableOpacity onPress={() => setEmotion(emotion)}>
+              <View
+                style={
+                  isActive
+                    ? {...styles.emotion, ...styles.activeEmotion}
+                    : styles.emotion
+                }>
+                <FontAwesomeIcon
+                  icon={EMOTION_ICONS[emotion]}
+                  size={50}
+                  style={
+                    isActive ? styles.activeEmotionIcon : styles.emotionIcon
+                  }
+                />
+                <Text
+                  style={
+                    isActive
+                      ? {...styles.emotionLabel, ...styles.activeEmotionLabel}
+                      : styles.emotionLabel
+                  }>
+                  {emotion}
+                </Text>
+              </View>
+            </TouchableOpacity>
           );
         })}
       </View>
@@ -58,12 +76,22 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   emotionsContainer: {
-    marginVertical: 20,
+    marginTop: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+  },
+  emotion: {
+    padding: 10,
+    borderRadius: 20,
+  },
+  activeEmotion: {
+    backgroundColor: lightPurple,
   },
   emotionIcon: {
     color: lightGrey,
+  },
+  activeEmotionIcon: {
+    color: yellow,
   },
   emotionLabel: {
     fontSize: 18,
@@ -71,7 +99,10 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     textAlign: 'center',
     marginTop: 10,
-    color: darkPurple
+    color: darkPurple,
+  },
+  activeEmotionLabel: {
+    color: 'white',
   },
 });
 
