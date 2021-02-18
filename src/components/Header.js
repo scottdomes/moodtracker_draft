@@ -18,6 +18,7 @@ const Header = ({text}) => {
 const styles = StyleSheet.create({
   container: {
     height: 250,
+
   },
   image: {
     flex: 1,
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   text: {
+    marginTop: -20,
     textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
