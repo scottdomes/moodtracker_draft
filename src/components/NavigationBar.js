@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import NavigationIcon from './NavigationIcon';
+import {basic} from '../styles/shadows';
 
 export const SCREENS = {
   HOME: 'HOME',
@@ -34,15 +35,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     height: 85,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: -4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-
-    elevation: 5,
+    ...basic,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
