@@ -19,24 +19,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  footer: {
-    backgroundColor: 'white',
-    height: 85,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: -4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-
-    elevation: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 60,
-    paddingBottom: 20,
-  },
 });
 
 export default App;
