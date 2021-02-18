@@ -1,10 +1,12 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, StatusBar, Button} from 'react-native';
+import React, {useState} from 'react';
+import {Text, StyleSheet, View, Button} from 'react-native';
 
 const App = () => {
+  const [user, setUser] = useState(null)
   return (
     <>
       <View style={styles.scrollView}>
+        <Text>Login status: {user ? user.email : 'Logged out'}</Text>
         <Button title="Log in" />
         <Button title="Sign up" />
         <Button title="Log out" />
