@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Header from './src/components/Header';
 import NavigationIcon from './src/components/NavigationIcon';
+import Screen from './src/components/Screen';
 import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useNavigation} from '@react-navigation/native';
 
 const TabBar = ({navigation, state}) => {
   ICONS = {
@@ -29,42 +29,31 @@ const TabBar = ({navigation, state}) => {
   );
 };
 
-const Layout = ({screenName}) => {
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <Header text={screenName} />
-    </View>
-  );
-};
-
-const HomeScreen = () => <Layout screenName="Home" />;
-const TrendsScreen = () => <Layout screenName="Trends" />;
-const ProfileScreen = () => <Layout screenName="Profile" />;
+const HomeScreen = () => <Screen name="Home" />;
+const TrendsScreen = () => <Screen name="Trends" />;
+const ProfileScreen = () => <Screen name="Profile" />;
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        tabBar={TabBar}
-        screenOptions={{headerShown: false}}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Trends" component={TrendsScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <Header />
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName="Home" tabBar={TabBar}>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Trends" component={TrendsScreen} />
+          <Tab.Screen name="Profile" component={ProfileScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    position: 'relative',
   },
   footer: {
     backgroundColor: 'white',
