@@ -1,18 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Header from './src/components/Header';
-import NavigationIcon from './src/components/NavigationIcon';
-import {faHome, faPoll, faUser} from '@fortawesome/free-solid-svg-icons';
+import NavigationBar, {SCREENS} from './src/components/NavigationBar';
 
 const App = () => {
+  const [currentScreen, setScreen] = useState(SCREENS.HOME);
   return (
     <View style={styles.container}>
-      <Header text="Home" />
-      <View style={styles.footer}>
-        <NavigationIcon icon={faHome} isActive />
-        <NavigationIcon icon={faPoll} />
-        <NavigationIcon icon={faUser} />
-      </View>
+      <Header text={currentScreen} />
+      <NavigationBar currentScreen={currentScreen} setScreen={setScreen} />
     </View>
   );
 };

@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 25,
+    textTransform: 'capitalize'
   },
 });
 
