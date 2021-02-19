@@ -2,27 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
-import {
-  faLaughSquint,
-  faSmile,
-  faMeh,
-  faFrown,
-} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-
-const EMOTIONS = {
-  SAD: 'SAD',
-  MEH: 'MEH',
-  GOOD: 'GOOD',
-  GREAT: 'GREAT',
-};
-
-const EMOTION_ICONS = {
-  SAD: faFrown,
-  MEH: faMeh,
-  GOOD: faSmile,
-  GREAT: faLaughSquint,
-};
+import {EMOTIONS, EMOTION_ICONS} from '../constants';
 
 const EmotionSelector = () => {
   const [currentEmotion, setEmotion] = useState(null);
