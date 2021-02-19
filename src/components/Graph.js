@@ -1,7 +1,7 @@
 import React from 'react';
 import {Defs, LinearGradient, Stop} from 'react-native-svg';
 import {LineChart, Grid} from 'react-native-svg-charts';
-import { darkPurple, lightPurple } from '../styles/colors';
+import {darkPurple, lightPurple} from '../styles/colors';
 
 const Gradient = () => (
   <Defs key={'gradient'}>
@@ -12,13 +12,18 @@ const Gradient = () => (
   </Defs>
 );
 
-const Graph = () => {
-  const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
+const Graph = ({timescale}) => {
+  const DATA = {
+    YEAR: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
+    MONTH: [70, 20, 40, 120, -4, -24, 85, 91, 25, 53, -53, 24, 50, -20, -80],
+    WEEK: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
+  };
 
   return (
     <LineChart
-      style={{height: 300, width: "100%"}}
-      data={data}
+      style={{height: 300, width: '100%'}}
+      data={DATA[timescale]}
+      animate
       contentInset={{top: 20, bottom: 20}}
       svg={{
         strokeWidth: 2,

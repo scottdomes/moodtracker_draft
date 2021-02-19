@@ -15,7 +15,7 @@ const EmotionChart = () => {
   const [currentTimescale, setTimescale] = useState(TIMESCALES.WEEK);
   return (
     <Card containerStyles={styles.card}>
-      <Graph />
+      <Graph timescale={currentTimescale} />
       <View style={styles.timescaleSelector}>
         {Object.keys(TIMESCALES).map((timescale) => {
           const isActive = timescale === currentTimescale;
