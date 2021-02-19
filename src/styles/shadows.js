@@ -1,4 +1,15 @@
-export const basic = {
+export const basicShadow = {
+  backgroundColor: 'white',
+  shadowColor: 'black',
+  shadowOffset: {
+    width: 0,
+    height: 4,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 10,
+};
+
+export const basicUpShadow = {
   backgroundColor: 'white',
   shadowColor: 'black',
   shadowOffset: {
@@ -6,7 +17,7 @@ export const basic = {
     height: -4,
   },
   shadowOpacity: 0.25,
-  shadowRadius: 10,
+  shadowRadius: 4,
 };
 
 export const lightShadow = {

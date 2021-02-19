@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import NavigationIcon from './NavigationIcon';
-import {basic} from '../styles/shadows';
+import {basicUpShadow} from '../styles/shadows';
 
 export const SCREENS = {
   HOME: 'HOME',
@@ -35,12 +35,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     height: 85,
-    ...basic,
+    ...basicUpShadow,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 60,
-    paddingBottom: 20,
+    paddingHorizontal: 30,
   },
 });
 

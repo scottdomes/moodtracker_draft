@@ -16,7 +16,9 @@ const App = () => {
           </View>
         </SafeAreaView>
       </ScrollView>
-      <NavigationBar currentScreen={currentScreen} setScreen={setScreen} />
+      <SafeAreaView>
+        <NavigationBar currentScreen={currentScreen} setScreen={setScreen} />
+      </SafeAreaView>
     </View>
   );
 };
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 20,
     flex: 1,
-    marginTop: -150,
+    marginTop: -140,
   },
 });
 

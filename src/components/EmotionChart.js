@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightPurple} from '../styles/colors';
-import {basic, lightShadow} from '../styles/shadows';
+import {lightShadow} from '../styles/shadows';
+import Graph from './Graph';
 
 const TIMESCALES = {
   YEAR: 'YEAR',
@@ -13,8 +14,8 @@ const TIMESCALES = {
 const EmotionChart = () => {
   const [currentTimescale, setTimescale] = useState(TIMESCALES.WEEK);
   return (
-    <Card containerStyles={{alignItems: 'center'}}>
-      <Text>Showing data for {currentTimescale}</Text>
+    <Card containerStyles={styles.card}>
+      <Graph />
       <View style={styles.timescaleSelector}>
         {Object.keys(TIMESCALES).map((timescale) => {
           const isActive = timescale === currentTimescale;
@@ -44,6 +45,7 @@ const EmotionChart = () => {
 };
 
 const styles = StyleSheet.create({
+  card: {alignItems: 'center', marginTop: 30},
   timescaleSelector: {
     ...lightShadow,
     flexDirection: 'row',
