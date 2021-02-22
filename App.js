@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, SafeAreaView, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import Header from './src/components/Header';
 import NavigationBar from './src/components/NavigationBar';
 import Home from './src/screens/Home';
@@ -17,11 +24,15 @@ const App = () => {
     currentScreen === SCREENS.SIGNUP
   ) {
     return (
-      <SafeAreaView>
-        <View style={styles.container}>
-          {currentScreen === SCREENS.LOGIN && <Login />}
-        </View>
-      </SafeAreaView>
+      <ImageBackground
+        source={require('./src/img/background.png')}
+        style={styles.image}>
+        <SafeAreaView>
+          <View style={styles.container}>
+            {currentScreen === SCREENS.LOGIN && <Login />}
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
     );
   }
 
@@ -54,6 +65,10 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     marginTop: -140,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 
