@@ -34,7 +34,7 @@ const Trends = () => {
       {TREND_CATEGORIES.map((category) => {
         const result = category.determiner();
         return (
-          <Card containerStyles={styles.card}>
+          <Card containerStyles={styles.card} key={category.name}>
             <FontAwesomeIcon icon={EMOTION_ICONS[result]} size={50} color={lightPurple} />
             <Text style={styles.text}>{category.name}</Text>
           </Card>
