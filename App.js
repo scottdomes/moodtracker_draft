@@ -5,10 +5,26 @@ import NavigationBar from './src/components/NavigationBar';
 import Home from './src/screens/Home';
 import Trends from './src/screens/Trends';
 import Profile from './src/screens/Profile';
+import Login from './src/screens/Login';
 import {SCREENS} from './src/constants';
 
 const App = () => {
-  const [currentScreen, setScreen] = useState(SCREENS.HOME);
+  const [currentScreen, setScreen] = useState(SCREENS.LOGIN);
+
+  if (
+    currentScreen === SCREENS.LOGIN ||
+    currentScreen === SCREENS.FORGOT ||
+    currentScreen === SCREENS.SIGNUP
+  ) {
+    return (
+      <SafeAreaView>
+        <View style={styles.container}>
+          {currentScreen === SCREENS.LOGIN && <Login />}
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView>

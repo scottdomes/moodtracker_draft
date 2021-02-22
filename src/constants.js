@@ -23,4 +23,7 @@ export const SCREENS = {
   HOME: 'HOME',
   TRENDS: 'TRENDS',
   PROFILE: 'PROFILE',
+  LOGIN: 'LOGIN',
+  SIGNUP: 'SIGNUP',
+  FORGOT: 'FORGOT',
 };
