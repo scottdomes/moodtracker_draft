@@ -4,6 +4,7 @@ import Header from './src/components/Header';
 import NavigationBar, {SCREENS} from './src/components/NavigationBar';
 import Home from './src/screens/Home';
 import Trends from './src/screens/Trends';
+import Profile from './src/screens/Profile';
 
 const App = () => {
   const [currentScreen, setScreen] = useState(SCREENS.HOME);
@@ -15,6 +16,7 @@ const App = () => {
           <View style={styles.contentContainer}>
             {currentScreen === SCREENS.HOME && <Home />}
             {currentScreen === SCREENS.TRENDS && <Trends />}
+            {currentScreen === SCREENS.PROFILE && <Profile />}
           </View>
         </SafeAreaView>
       </ScrollView>
