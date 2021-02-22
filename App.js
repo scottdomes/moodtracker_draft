@@ -1,19 +1,7 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  ImageBackground,
-} from 'react-native';
-import Header from './src/components/Header';
-import NavigationBar from './src/components/NavigationBar';
-import Home from './src/screens/Home';
-import Trends from './src/screens/Trends';
-import Profile from './src/screens/Profile';
-import Login from './src/screens/Login';
 import {SCREENS} from './src/constants';
+import AuthScreenContainer from './src/screens/AuthScreenContainer';
+import MainScreenContainer from './src/screens/MainScreenContainer';
 
 const App = () => {
   const [currentScreen, setScreen] = useState(SCREENS.LOGIN);
@@ -23,53 +11,12 @@ const App = () => {
     currentScreen === SCREENS.FORGOT ||
     currentScreen === SCREENS.SIGNUP
   ) {
-    return (
-      <ImageBackground
-        source={require('./src/img/background.png')}
-        style={styles.image}>
-        <SafeAreaView>
-          <View style={styles.container}>
-            {currentScreen === SCREENS.LOGIN && <Login />}
-          </View>
-        </SafeAreaView>
-      </ImageBackground>
-    );
+    return <AuthScreenContainer currentScreen={currentScreen} />;
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Header text={currentScreen} />
-        <SafeAreaView>
-          <View style={styles.contentContainer}>
-            {currentScreen === SCREENS.HOME && <Home />}
-            {currentScreen === SCREENS.TRENDS && <Trends />}
-            {currentScreen === SCREENS.PROFILE && <Profile />}
-          </View>
-        </SafeAreaView>
-      </ScrollView>
-      <SafeAreaView>
-        <NavigationBar currentScreen={currentScreen} setScreen={setScreen} />
-      </SafeAreaView>
-    </View>
+    <MainScreenContainer currentScreen={currentScreen} setScreen={setScreen} />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  contentContainer: {
-    padding: 20,
-    flex: 1,
-    marginTop: -140,
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-});
 
 export default App;

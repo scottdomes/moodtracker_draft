@@ -1,22 +1,18 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import BasicButton from '../components/Button';
+import Card from '../components/Card';
 
 const Login = () => {
   return (
-    <View style={styles.container}>
-      <BasicButton>Log out</BasicButton>
-    </View>
+      <Card>
+        
+      </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 200,
-  },
+
 });
 
 export default Login;
