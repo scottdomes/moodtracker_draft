@@ -2,12 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import NavigationIcon from './NavigationIcon';
 import {basicUpShadow} from '../styles/shadows';
-
-export const SCREENS = {
-  HOME: 'HOME',
-  TRENDS: 'TRENDS',
-  PROFILE: 'PROFILE',
-};
+import {SCREENS} from '../constants';
 
 const NavigationBar = ({setScreen, currentScreen}) => {
   return (

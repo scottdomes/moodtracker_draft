@@ -18,3 +18,9 @@ export const EMOTION_ICONS = {
   GOOD: faSmile,
   GREAT: faLaughSquint,
 };
+
+export const SCREENS = {
+  HOME: 'HOME',
+  TRENDS: 'TRENDS',
+  PROFILE: 'PROFILE',
+};

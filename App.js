@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, SafeAreaView, ScrollView} from 'react-native';
 import Header from './src/components/Header';
-import NavigationBar, {SCREENS} from './src/components/NavigationBar';
+import NavigationBar from './src/components/NavigationBar';
 import Home from './src/screens/Home';
 import Trends from './src/screens/Trends';
 import Profile from './src/screens/Profile';
+import {SCREENS} from './src/constants';
 
 const App = () => {
   const [currentScreen, setScreen] = useState(SCREENS.HOME);
