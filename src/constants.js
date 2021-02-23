@@ -12,6 +12,13 @@ export const EMOTIONS = {
   GREAT: 'GREAT',
 };
 
+export const EMOTION_NUMBERS = {
+  SAD: 1,
+  MEH: 2,
+  GOOD: 3,
+  GREAT: 4,
+};
+
 export const EMOTION_ICONS = {
   SAD: faFrown,
   MEH: faMeh,
@@ -26,4 +33,10 @@ export const SCREENS = {
   LOGIN: 'LOGIN',
   SIGNUP: 'SIGNUP',
   FORGOT: 'FORGOT',
+};
+
+export const TIMESCALES = {
+  YEAR: 'YEAR',
+  MONTH: 'MONTH',
+  WEEK: 'WEEK',
 };

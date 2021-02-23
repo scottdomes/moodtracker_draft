@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {EMOTIONS, EMOTION_ICONS} from '../constants';
 import database from '@react-native-firebase/database';
 
-const getDateString = () => {
+const getRefString = () => {
   const date = new Date();
   return `${date.getFullYear()}_${date.getMonth()}_${date.getDay()}_${date.getHours()}`;
 };
@@ -17,10 +17,10 @@ const EmotionSelector = ({user}) => {
   chooseEmotion = (selectedEmotion) => {
     setEmotion(selectedEmotion);
     const reference = database().ref(
-      `/users/${user.uid}/moods/${getDateString()}`,
+      `/users/${user.uid}/moods/${getRefString()}`,
     );
     reference
-      .set({emotion: selectedEmotion})
+      .set({emotion: selectedEmotion, timestamp: new Date()})
   };
   return (
     <Card>

@@ -12,17 +12,18 @@ const Gradient = () => (
   </Defs>
 );
 
-const Graph = ({timescale}) => {
+const Graph = ({timescale, data}) => {
   const DATA = {
     YEAR: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
     MONTH: [70, 20, 40, 120, -4, -24, 85, 91, 25, 53, -53, 24, 50, -20, -80],
     WEEK: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
   };
 
+    console.log(data)
   return (
     <LineChart
       style={{height: 300, width: '100%'}}
-      data={DATA[timescale]}
+      data={data}
       animate
       contentInset={{top: 20, bottom: 20}}
       svg={{
