@@ -6,15 +6,16 @@ import {lightShadow} from '../styles/shadows';
 import Graph from './Graph';
 import database from '@react-native-firebase/database';
 import {TIMESCALES, EMOTION_NUMBERS} from '../constants';
+import {onLoadEmotions} from '../utils/db';
 
 const EmotionChart = ({user}) => {
   const [currentTimescale, setTimescale] = useState(TIMESCALES.WEEK);
   const [moods, setMoods] = useState([]);
+
   const reference = database().ref(`/users/${user.uid}/moods/`);
   useEffect(() => {
-    const onValueChange = reference.on('value', (snapshot) => {
-      const formattedMoods = Object.values(snapshot.val());
-      setMoods(formattedMoods);
+    const onValueChange = onLoadEmotions(reference, (moods) => {
+      setMoods(moods);
     });
 
     // Stop listening for updates when no longer required

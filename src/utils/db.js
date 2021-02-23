@@ -2,6 +2,13 @@ import database from '@react-native-firebase/database';
 import {subMonths, subDays, subHours} from 'date-fns';
 import {EMOTIONS} from '../constants';
 
+export const onLoadEmotions = (reference, callback) => {
+  return reference.on('value', (snapshot) => {
+    const formattedMoods = Object.values(snapshot.val());
+    callback(formattedMoods);
+  });
+};
+
 const randomProperty = (obj) => {
   const keys = Object.keys(obj);
   return obj[keys[(keys.length * Math.random()) << 0]];
