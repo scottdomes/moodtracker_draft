@@ -2,15 +2,13 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import BasicButton from '../components/Button';
-import Card from '../components/Card';
 import Input from '../components/Input';
 import {lightPurple} from '../styles/colors';
 import Link from '../components/Link';
 
-const Login = ({navigateToSignUp, navigateToForgot}) => {
+const Login = ({navigateToSignUp, navigateToForgot, setError}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const logIn = () => {
     setError('');
@@ -29,11 +27,7 @@ const Login = ({navigateToSignUp, navigateToForgot}) => {
       });
   };
   return (
-    <Card containerStyles={styles.card}>
-      <View style={styles.center}>
-        <Image source={require('../img/icon.png')} />
-        <Text style={styles.error}>{error}</Text>
-      </View>
+    <>
       <Input
         label="Email"
         onChangeText={(text) => setEmail(text)}
@@ -58,20 +52,16 @@ const Login = ({navigateToSignUp, navigateToForgot}) => {
           <Link onNavigate={navigateToForgot}>Forgot password?</Link>
         </View>
       </View>
-    </Card>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'column',
-    paddingBottom: 30,
+  linkContainer: {
+    marginTop: 20,
   },
   center: {
     alignItems: 'center',
-  },
-  linkContainer: {
-    marginTop: 20,
   },
 });
 

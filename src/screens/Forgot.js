@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 import BasicButton from '../components/Button';
-import Card from '../components/Card';
 import Input from '../components/Input';
 import {lightPurple} from '../styles/colors';
 import Link from '../components/Link';
 
-const Forgot = ({navigateToLogin}) => {
+const Forgot = ({navigateToLogin, setError}) => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
 
   const forgotPassword = () => {
     auth()
@@ -23,11 +21,7 @@ const Forgot = ({navigateToLogin}) => {
       });
   };
   return (
-    <Card containerStyles={styles.card}>
-      <View style={styles.center}>
-        <Image source={require('../img/icon.png')} />
-        <Text style={styles.error}>{error}</Text>
-      </View>
+    <>
       <Input
         label="Email"
         onChangeText={(text) => setEmail(text)}
@@ -42,15 +36,11 @@ const Forgot = ({navigateToLogin}) => {
           <Link onNavigate={navigateToLogin}>Back to login</Link>
         </View>
       </View>
-    </Card>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'column',
-    paddingBottom: 30,
-  },
   center: {
     alignItems: 'center',
   },

@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 
-import {Image, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import BasicButton from '../components/Button';
-import Card from '../components/Card';
 import Input from '../components/Input';
 import Link from '../components/Link';
 import {lightPurple} from '../styles/colors';
 
-const SignUp = ({navigateToLogin, navigateToHome}) => {
+const SignUp = ({navigateToLogin, setError}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const signUp = () => {
     setError('');
@@ -30,11 +28,7 @@ const SignUp = ({navigateToLogin, navigateToHome}) => {
       });
   };
   return (
-    <Card containerStyles={styles.card}>
-      <View style={styles.center}>
-        <Image source={require('../img/icon.png')} />
-        <Text style={styles.error}>{error}</Text>
-      </View>
+    <>
       <Input
         label="Email"
         onChangeText={(text) => setEmail(text)}
@@ -57,15 +51,11 @@ const SignUp = ({navigateToLogin, navigateToHome}) => {
           <Link onNavigate={navigateToLogin}>Back to log in</Link>
         </View>
       </View>
-    </Card>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'column',
-    paddingBottom: 30,
-  },
   center: {
     alignItems: 'center',
   },
