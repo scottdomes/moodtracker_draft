@@ -3,11 +3,15 @@ import {TextInput, View, Text, StyleSheet} from 'react-native';
 import { darkPurple } from '../styles/colors';
 import { basicShadow } from '../styles/shadows';
 
-const Input = ({label}) => {
+const Input = ({label, onChangeText, value}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={value}
+      />
     </View>
   );
 };

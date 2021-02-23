@@ -19,7 +19,10 @@ const AuthScreenContainer = ({currentScreen, setScreen}) => {
             />
           )}
           {currentScreen === SCREENS.SIGNUP && (
-            <SignUp navigateToLogin={() => setScreen(SCREENS.LOGIN)} />
+            <SignUp
+              navigateToLogin={() => setScreen(SCREENS.LOGIN)}
+              navigateToHome={() => setScreen(SCREENS.HOME)}
+            />
           )}
           {currentScreen === SCREENS.FORGOT && (
             <Forgot navigateToLogin={() => setScreen(SCREENS.LOGIN)} />
