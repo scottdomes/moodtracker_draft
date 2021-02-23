@@ -20,6 +20,7 @@ const EmotionSelector = () => {
 
   useEffect(() => {
     const onValueChange = reference.on('value', (snapshot) => {
+      console.log(snapshot.val());
       if (snapshot.val()) {
         setEmotion(snapshot.val().emotion);
       }
@@ -34,7 +35,10 @@ const EmotionSelector = () => {
     const reference = database().ref(
       `/users/${user.uid}/moods/${getRefString(timestamp)}`,
     );
-    reference.set({emotion: selectedEmotion, timestamp});
+    reference.set({
+      emotion: selectedEmotion,
+      timestamp: timestamp.toISOString(),
+    });
   };
   return (
     <Card>
