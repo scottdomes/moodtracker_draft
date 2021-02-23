@@ -1,6 +1,8 @@
+import {subDays, subMonths, subYears} from 'date-fns';
 import React from 'react';
 import {Defs, LinearGradient, Stop} from 'react-native-svg';
 import {LineChart, Grid} from 'react-native-svg-charts';
+import {EMOTION_NUMBERS, TIMESCALES} from '../constants';
 import {darkPurple, lightPurple} from '../styles/colors';
 
 const Gradient = () => (
@@ -12,18 +14,31 @@ const Gradient = () => (
   </Defs>
 );
 
-const Graph = ({timescale, data}) => {
-  const DATA = {
-    YEAR: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
-    MONTH: [70, 20, 40, 120, -4, -24, 85, 91, 25, 53, -53, 24, 50, -20, -80],
-    WEEK: [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80],
-  };
+const filterByTimescale = (timescale, data) => {
+  let date = null;
+  if (timescale === TIMESCALES.WEEK) {
+    date = subDays(new Date(), 7);
+  } else if (timescale === TIMESCALES.MONTH) {
+    date = subMonths(new Date(), 1);
+  } else {
+    date = subYears(new Date(), 1);
+  }
 
-    console.log(data)
+  return data.filter((record) => {
+    return new Date(record.timestamp) > date;
+  });
+};
+
+const Graph = ({timescale, data}) => {
+  const dataToDisplay = filterByTimescale(timescale, data);
+  const formattedData = dataToDisplay.map(
+    (record) => EMOTION_NUMBERS[record.emotion],
+  );
+  console.log(dataToDisplay)
   return (
     <LineChart
       style={{height: 300, width: '100%'}}
-      data={data}
+      data={formattedData}
       animate
       contentInset={{top: 20, bottom: 20}}
       svg={{

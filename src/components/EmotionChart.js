@@ -13,9 +13,7 @@ const EmotionChart = ({user}) => {
   const reference = database().ref(`/users/${user.uid}/moods/`);
   useEffect(() => {
     const onValueChange = reference.on('value', (snapshot) => {
-      const formattedMoods = Object.values(snapshot.val()).map((record) => {
-        return EMOTION_NUMBERS[record.emotion];
-      });
+      const formattedMoods = Object.values(snapshot.val());
       setMoods(formattedMoods);
     });
 
