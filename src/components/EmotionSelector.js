@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
@@ -9,9 +9,23 @@ import {getRefString} from '../utils/db';
 
 const EmotionSelector = ({user}) => {
   const [currentEmotion, setEmotion] = useState(null);
+  const timestamp = new Date();
+
+  const reference = database().ref(
+    `/users/${user.uid}/moods/${getRefString(timestamp)}`,
+  );
+
+  useEffect(() => {
+    const onValueChange = reference.on('value', (snapshot) => {
+      console.log(snapshot.val())
+      setEmotion(snapshot.val().emotion);
+    });
+
+    // Stop listening for updates when no longer required
+    return () => reference.off('value', onValueChange);
+  }, [user]);
 
   chooseEmotion = (selectedEmotion) => {
-    const timestamp = new Date();
     setEmotion(selectedEmotion);
     const reference = database().ref(
       `/users/${user.uid}/moods/${getRefString(timestamp)}`,
