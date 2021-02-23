@@ -4,14 +4,19 @@ import AuthScreenContainer from './src/screens/AuthScreenContainer';
 import MainScreenContainer from './src/screens/MainScreenContainer';
 
 const App = () => {
-  const [currentScreen, setScreen] = useState(SCREENS.LOGIN);
+  const [currentScreen, setScreen] = useState(SCREENS.SIGNUP);
 
   if (
     currentScreen === SCREENS.LOGIN ||
     currentScreen === SCREENS.FORGOT ||
     currentScreen === SCREENS.SIGNUP
   ) {
-    return <AuthScreenContainer currentScreen={currentScreen} />;
+    return (
+      <AuthScreenContainer
+        currentScreen={currentScreen}
+        setScreen={setScreen}
+      />
+    );
   }
 
   return (
