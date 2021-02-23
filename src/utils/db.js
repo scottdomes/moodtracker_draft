@@ -57,5 +57,5 @@ const seedPastYear = (user) => {
 export const seed = (user) => {
   seedPastYear(user);
   seedPastMonth(user);
-  seedPastWeek(user);
+  // seedPastWeek(user);
 };

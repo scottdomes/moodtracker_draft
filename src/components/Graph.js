@@ -31,10 +31,12 @@ const filterByTimescale = (timescale, data) => {
 
 const Graph = ({timescale, data}) => {
   const dataToDisplay = filterByTimescale(timescale, data);
-  const formattedData = dataToDisplay.map(
+  const orderedData = dataToDisplay.sort(
+    (a, b) => new Date(a.timestamp) - new Date(b.timestamp),
+  );
+  const formattedData = orderedData.map(
     (record) => EMOTION_NUMBERS[record.emotion],
   );
-  console.log(dataToDisplay)
   return (
     <LineChart
       style={{height: 300, width: '100%'}}
