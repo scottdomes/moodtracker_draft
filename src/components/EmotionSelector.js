@@ -4,9 +4,23 @@ import Card from '../components/Card';
 import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {EMOTIONS, EMOTION_ICONS} from '../constants';
+import database from '@react-native-firebase/database';
 
-const EmotionSelector = () => {
+const getDateString = () => {
+  const date = new Date();
+  return `${date.getFullYear()}_${date.getMonth()}_${date.getDay()}_${date.getHours()}`;
+};
+
+const EmotionSelector = ({user}) => {
   const [currentEmotion, setEmotion] = useState(null);
+
+  chooseEmotion = (emotion) => {
+    setEmotion(emotion);
+    const reference = database().ref(
+      `/users/${user.uid}/moods/${getDateString()}`,
+    );
+    reference.set({emotion});
+  };
   return (
     <Card>
       <Text style={styles.greeting}>How are you today?</Text>
@@ -14,7 +28,7 @@ const EmotionSelector = () => {
         {Object.keys(EMOTIONS).map((emotion) => {
           const isActive = currentEmotion === emotion;
           return (
-            <TouchableOpacity onPress={() => setEmotion(emotion)} key={emotion}>
+            <TouchableOpacity onPress={chooseEmotion} key={emotion}>
               <View
                 style={
                   isActive

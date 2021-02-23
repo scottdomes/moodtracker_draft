@@ -5,6 +5,8 @@ import {SCREENS} from './src/constants';
 import AuthScreenContainer from './src/screens/AuthScreenContainer';
 import MainScreenContainer from './src/screens/MainScreenContainer';
 
+export const UserContext = React.createContext(null);
+
 const App = () => {
   const [currentScreen, setScreen] = useState(SCREENS.SIGNUP);
   const [initializing, setInitializing] = useState(true);
@@ -41,7 +43,12 @@ const App = () => {
   }
 
   return (
-    <MainScreenContainer currentScreen={currentScreen} setScreen={setScreen} />
+    <UserContext.Provider value={user}>
+      <MainScreenContainer
+        currentScreen={currentScreen}
+        setScreen={setScreen}
+      />
+    </UserContext.Provider>
   );
 };
 
