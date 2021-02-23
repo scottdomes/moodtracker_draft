@@ -18,10 +18,12 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   input: {
-    height: 45,
+    height: 55,
     ...basicShadow,
     borderRadius: 22,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    fontSize: 18,
+    color: darkPurple
   },
   label: {
     paddingLeft: 15,
