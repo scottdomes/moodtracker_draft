@@ -13,15 +13,10 @@ const SignUp = ({navigateToLogin, navigateToHome}) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  console.log(email, password);
-
   const signUp = () => {
     setError('');
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        navigateToHome();
-      })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
           setError('That email address is already in use!');

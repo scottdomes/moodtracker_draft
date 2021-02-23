@@ -13,7 +13,11 @@ const App = () => {
   function onAuthStateChanged(user) {
     setUser(user);
     console.log(user);
-    if (user) setScreen(SCREENS.HOME);
+    if (user) {
+      setScreen(SCREENS.HOME);
+    } else {
+      setScreen(SCREENS.LOGIN);
+    }
     if (initializing) setInitializing(false);
   }
 
