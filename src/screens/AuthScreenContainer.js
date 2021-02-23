@@ -3,6 +3,7 @@ import {StyleSheet, View, SafeAreaView, ImageBackground} from 'react-native';
 import Login from './Login';
 import {SCREENS} from '../constants';
 import SignUp from './SignUp';
+import Forgot from './Forgot';
 
 const AuthScreenContainer = ({currentScreen, setScreen}) => {
   return (
@@ -12,10 +13,16 @@ const AuthScreenContainer = ({currentScreen, setScreen}) => {
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
           {currentScreen === SCREENS.LOGIN && (
-            <Login navigateToSignUp={() => setScreen(SCREENS.SIGNUP)} />
+            <Login
+              navigateToSignUp={() => setScreen(SCREENS.SIGNUP)}
+              navigateToForgot={() => setScreen(SCREENS.FORGOT)}
+            />
           )}
           {currentScreen === SCREENS.SIGNUP && (
             <SignUp navigateToLogin={() => setScreen(SCREENS.LOGIN)} />
+          )}
+          {currentScreen === SCREENS.FORGOT && (
+            <Forgot navigateToLogin={() => setScreen(SCREENS.LOGIN)} />
           )}
         </View>
       </SafeAreaView>

@@ -6,21 +6,17 @@ import Input from '../components/Input';
 import {lightPurple} from '../styles/colors';
 import Link from '../components/Link';
 
-const Login = ({navigateToSignUp, navigateToForgot}) => {
+const Forgot = ({navigateToLogin}) => {
   return (
     <Card containerStyles={styles.card}>
       <View style={styles.center}>
         <Image source={require('../img/icon.png')} />
       </View>
-      <Input label="Username" />
-      <Input label="Password" />
+      <Input label="Email" />
       <View style={styles.center}>
-        <BasicButton backgroundColor={lightPurple}>Log in</BasicButton>
+        <BasicButton backgroundColor={lightPurple}>Submit</BasicButton>
         <View style={styles.linkContainer}>
-          <Link onNavigate={navigateToSignUp}>Sign up</Link>
-        </View>
-        <View style={styles.linkContainer}>
-          <Link onNavigate={navigateToForgot}>Forgot password?</Link>
+          <Link onNavigate={navigateToLogin}>Back to login</Link>
         </View>
       </View>
     </Card>
@@ -40,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Forgot;
