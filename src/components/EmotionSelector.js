@@ -14,12 +14,13 @@ const getDateString = () => {
 const EmotionSelector = ({user}) => {
   const [currentEmotion, setEmotion] = useState(null);
 
-  chooseEmotion = (emotion) => {
-    setEmotion(emotion);
+  chooseEmotion = (selectedEmotion) => {
+    setEmotion(selectedEmotion);
     const reference = database().ref(
       `/users/${user.uid}/moods/${getDateString()}`,
     );
-    reference.set({emotion});
+    reference
+      .set({emotion: selectedEmotion})
   };
   return (
     <Card>
@@ -28,7 +29,7 @@ const EmotionSelector = ({user}) => {
         {Object.keys(EMOTIONS).map((emotion) => {
           const isActive = currentEmotion === emotion;
           return (
-            <TouchableOpacity onPress={chooseEmotion} key={emotion}>
+            <TouchableOpacity onPress={() => chooseEmotion(emotion)} key={emotion}>
               <View
                 style={
                   isActive
