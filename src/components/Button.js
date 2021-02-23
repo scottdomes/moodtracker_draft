@@ -3,9 +3,11 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {yellow} from '../styles/colors';
 import {basicShadow} from '../styles/shadows';
 
-const BasicButton = ({onPress, children}) => {
+const BasicButton = ({onPress, children, backgroundColor}) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={{...styles.container, backgroundColor}}
+      onPress={onPress}>
       <Text style={styles.text}>{children}</Text>
     </TouchableOpacity>
   );

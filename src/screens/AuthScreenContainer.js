@@ -6,7 +6,7 @@ import {SCREENS} from '../constants';
 const AuthScreenContainer = ({currentScreen}) => {
   return (
     <ImageBackground
-      source={require('../img/background.png')}
+      source={require('../img/backgroundvertical.png')}
       style={styles.background}>
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingHorizontal: 30
   },
   background: {
     flex: 1,
