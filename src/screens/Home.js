@@ -2,10 +2,10 @@ import React from 'react';
 import EmotionSelector from '../components/EmotionSelector';
 import EmotionChart from '../components/EmotionChart';
 
-const Home = ({moods}) => {
+const Home = ({moods, currentMood, saveMood}) => {
   return (
     <>
-      <EmotionSelector moods={moods} />
+      <EmotionSelector currentMood={currentMood} saveMood={saveMood} />
       <EmotionChart moods={moods} />
     </>
   );

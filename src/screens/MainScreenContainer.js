@@ -9,6 +9,7 @@ import Profile from './Profile';
 import {SCREENS} from '../constants';
 import {onLoadEmotions} from '../utils/db';
 import {UserContext} from '../../App';
+import {getRefString} from '../utils/db';
 
 const Content = ({currentScreen}) => {
   const user = useContext(UserContext);
@@ -18,17 +19,46 @@ const Content = ({currentScreen}) => {
   }
 
   const [moods, setMoods] = useState([]);
+  const [currentMood, setCurrentMood] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const reference = database().ref(`/users/${user.uid}/moods/`);
+  const timestamp = new Date();
+  const allMoodRef = database().ref(`/users/${user.uid}/moods/`);
+  const currentMoodRef = database().ref(
+    `/users/${user.uid}/moods/${getRefString(timestamp)}`,
+  );
+
+  const saveMood = (selectedEmotion) => {
+    setCurrentMood(selectedEmotion);
+    const currentTimestamp = new Date();
+
+    const reference = database().ref(
+      `/users/${user.uid}/moods/${getRefString(currentTimestamp)}`,
+    );
+    reference.set({
+      emotion: selectedEmotion,
+      timestamp: timestamp.toISOString(),
+    });
+  };
+
   useEffect(() => {
-    const onValueChange = onLoadEmotions(reference, (moods) => {
+    const onAllMoodsChange = onLoadEmotions(allMoodRef, (moods) => {
       setMoods(moods);
       setIsLoaded(true);
     });
 
+    const onCurrentMoodChange = currentMoodRef.on('value', (snapshot) => {
+      console.log(snapshot.val())
+      if (snapshot.val()) {
+        setCurrentMood(snapshot.val().emotion);
+      }
+    });
+
     // Stop listening for updates when no longer required
-    return () => reference.off('value', onValueChange);
+    return () => {
+      allMoodRef.off('value', onAllMoodsChange);
+      currentMoodRef.off('value', onCurrentMoodChange);
+    };
   }, [user]);
 
   if (!isLoaded) {
@@ -37,7 +67,9 @@ const Content = ({currentScreen}) => {
 
   return (
     <View style={styles.contentContainer}>
-      {currentScreen === SCREENS.HOME && <Home moods={moods} />}
+      {currentScreen === SCREENS.HOME && (
+        <Home moods={moods} currentMood={currentMood} saveMood={saveMood} />
+      )}
       {currentScreen === SCREENS.TRENDS && <Trends moods={moods} />}
       {currentScreen === SCREENS.PROFILE && <Profile />}
     </View>

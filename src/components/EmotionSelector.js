@@ -1,55 +1,19 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {EMOTIONS, EMOTION_ICONS} from '../constants';
-import database from '@react-native-firebase/database';
-import {getRefString} from '../utils/db';
-import {UserContext} from '../../App';
 
-const EmotionSelector = () => {
-  const user = useContext(UserContext);
-
-  const [currentEmotion, setEmotion] = useState(null);
-  const timestamp = new Date();
-
-  const reference = database().ref(
-    `/users/${user.uid}/moods/${getRefString(timestamp)}`,
-  );
-
-  useEffect(() => {
-    const onValueChange = reference.on('value', (snapshot) => {
-      console.log(snapshot.val());
-      if (snapshot.val()) {
-        setEmotion(snapshot.val().emotion);
-      }
-    });
-
-    // Stop listening for updates when no longer required
-    return () => reference.off('value', onValueChange);
-  }, [user]);
-
-  chooseEmotion = (selectedEmotion) => {
-    setEmotion(selectedEmotion);
-    const reference = database().ref(
-      `/users/${user.uid}/moods/${getRefString(timestamp)}`,
-    );
-    reference.set({
-      emotion: selectedEmotion,
-      timestamp: timestamp.toISOString(),
-    });
-  };
+const EmotionSelector = ({currentMood, saveMood}) => {
   return (
     <Card>
       <Text style={styles.greeting}>How are you today?</Text>
       <View style={styles.emotionsContainer}>
         {Object.keys(EMOTIONS).map((emotion) => {
-          const isActive = currentEmotion === emotion;
+          const isActive = currentMood === emotion;
           return (
-            <TouchableOpacity
-              onPress={() => chooseEmotion(emotion)}
-              key={emotion}>
+            <TouchableOpacity onPress={() => saveMood(emotion)} key={emotion}>
               <View
                 style={
                   isActive
