@@ -5,22 +5,18 @@ import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {EMOTIONS, EMOTION_ICONS} from '../constants';
 import database from '@react-native-firebase/database';
-
-const getRefString = () => {
-  const date = new Date();
-  return `${date.getFullYear()}_${date.getMonth()}_${date.getDay()}_${date.getHours()}`;
-};
+import {getRefString} from '../utils/db';
 
 const EmotionSelector = ({user}) => {
   const [currentEmotion, setEmotion] = useState(null);
 
   chooseEmotion = (selectedEmotion) => {
+    const timestamp = new Date();
     setEmotion(selectedEmotion);
     const reference = database().ref(
-      `/users/${user.uid}/moods/${getRefString()}`,
+      `/users/${user.uid}/moods/${getRefString(timestamp)}`,
     );
-    reference
-      .set({emotion: selectedEmotion, timestamp: new Date()})
+    reference.set({emotion: selectedEmotion, timestamp});
   };
   return (
     <Card>
@@ -29,7 +25,9 @@ const EmotionSelector = ({user}) => {
         {Object.keys(EMOTIONS).map((emotion) => {
           const isActive = currentEmotion === emotion;
           return (
-            <TouchableOpacity onPress={() => chooseEmotion(emotion)} key={emotion}>
+            <TouchableOpacity
+              onPress={() => chooseEmotion(emotion)}
+              key={emotion}>
               <View
                 style={
                   isActive
