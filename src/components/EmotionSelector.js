@@ -17,8 +17,9 @@ const EmotionSelector = ({user}) => {
 
   useEffect(() => {
     const onValueChange = reference.on('value', (snapshot) => {
-      console.log(snapshot.val())
-      setEmotion(snapshot.val().emotion);
+      if (snapshot.val()) {
+        setEmotion(snapshot.val().emotion);
+      }
     });
 
     // Stop listening for updates when no longer required

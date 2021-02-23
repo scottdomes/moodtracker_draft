@@ -7,7 +7,13 @@ import {darkPurple, lightPurple} from '../styles/colors';
 import {UserContext} from '../../App';
 import database from '@react-native-firebase/database';
 import {onLoadEmotions} from '../utils/db';
-import {mostCommonMood, averageMood, leastCommonMood} from '../utils/trends';
+import {
+  mostCommonMood,
+  averageMood,
+  leastCommonMood,
+  averageMoodThisWeek,
+  averageMoodLastWeek,
+} from '../utils/trends';
 
 const TREND_CATEGORIES = [
   {
@@ -24,11 +30,11 @@ const TREND_CATEGORIES = [
   },
   {
     name: 'Average this week',
-    determiner: (data) => EMOTIONS.GOOD,
+    determiner: averageMoodThisWeek,
   },
   {
     name: 'Average last week',
-    determiner: (data) => EMOTIONS.MEH,
+    determiner: averageMoodLastWeek,
   },
 ];
 

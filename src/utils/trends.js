@@ -1,3 +1,4 @@
+import {subDays} from 'date-fns';
 import {EMOTION_NUMBERS} from '../constants';
 
 const getEmotionCounts = (data) => {
@@ -31,7 +32,7 @@ export const leastCommonMood = (data) => {
 
 export const averageMood = (data) => {
   const emotionCounts = getEmotionCounts(data);
-  console.log(emotionCounts);
+
   const total = Object.keys(emotionCounts).reduce(
     (accumulator, emotion) =>
       accumulator + EMOTION_NUMBERS[emotion] * emotionCounts[emotion],
@@ -41,4 +42,26 @@ export const averageMood = (data) => {
   return Object.keys(EMOTION_NUMBERS).find(
     (key) => EMOTION_NUMBERS[key] === number,
   );
+};
+
+export const averageMoodThisWeek = (data) => {
+  const date = subDays(new Date(), 7);
+
+  const filteredData = data.filter((record) => {
+    return new Date(record.timestamp) > date;
+  });
+
+  return averageMood(filteredData);
+};
+
+export const averageMoodLastWeek = (data) => {
+  const beginning = subDays(new Date(), 14);
+  const end = subDays(new Date(), 7);
+
+  const filteredData = data.filter((record) => {
+    const recordDate = new Date(record.timestamp);
+    return recordDate > beginning && recordDate < end;
+  });
+
+  return averageMood(filteredData);
 };
