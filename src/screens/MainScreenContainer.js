@@ -13,6 +13,10 @@ import {UserContext} from '../../App';
 const Content = ({currentScreen}) => {
   const user = useContext(UserContext);
 
+  if (!user) {
+    return false;
+  }
+
   const [moods, setMoods] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
