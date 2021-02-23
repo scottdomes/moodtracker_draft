@@ -1,26 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightPurple} from '../styles/colors';
 import {lightShadow} from '../styles/shadows';
 import Graph from './Graph';
-import database from '@react-native-firebase/database';
-import {TIMESCALES, EMOTION_NUMBERS} from '../constants';
-import {onLoadEmotions} from '../utils/db';
+import {TIMESCALES} from '../constants';
 
-const EmotionChart = ({user}) => {
+const EmotionChart = ({moods}) => {
   const [currentTimescale, setTimescale] = useState(TIMESCALES.WEEK);
-  const [moods, setMoods] = useState([]);
-
-  const reference = database().ref(`/users/${user.uid}/moods/`);
-  useEffect(() => {
-    const onValueChange = onLoadEmotions(reference, (moods) => {
-      setMoods(moods);
-    });
-
-    // Stop listening for updates when no longer required
-    return () => reference.off('value', onValueChange);
-  }, [user]);
 
   return (
     <Card containerStyles={styles.card}>

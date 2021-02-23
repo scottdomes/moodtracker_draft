@@ -38,25 +38,7 @@ const TREND_CATEGORIES = [
   },
 ];
 
-const Trends = () => {
-  const user = useContext(UserContext);
-
-  const [moods, setMoods] = useState([]);
-
-  const reference = database().ref(`/users/${user.uid}/moods/`);
-  useEffect(() => {
-    const onValueChange = onLoadEmotions(reference, (moods) => {
-      setMoods(moods);
-    });
-
-    // Stop listening for updates when no longer required
-    return () => reference.off('value', onValueChange);
-  }, [user]);
-
-  if (moods.length === 0) {
-    return null;
-  }
-
+const Trends = ({moods}) => {
   return (
     <>
       {TREND_CATEGORIES.map((category) => {

@@ -1,21 +1,14 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import EmotionSelector from '../components/EmotionSelector';
 import EmotionChart from '../components/EmotionChart';
-import {UserContext} from '../../App.js';
 
-const Home = () => {
+const Home = ({ moods }) => {
   return (
-    <UserContext.Consumer>
-      {(user) => {
-        return (
-          <>
-            <EmotionSelector user={user} />
-            <EmotionChart user={user} />
-          </>
-        );
-      }}
-    </UserContext.Consumer>
+    <>
+      <EmotionSelector moods={moods} />
+      <EmotionChart moods={moods} />
+    </>
   );
 };
 

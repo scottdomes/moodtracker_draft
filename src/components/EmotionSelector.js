@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import {darkPurple, lightGrey, yellow, lightPurple} from '../styles/colors';
@@ -6,8 +6,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {EMOTIONS, EMOTION_ICONS} from '../constants';
 import database from '@react-native-firebase/database';
 import {getRefString} from '../utils/db';
+import {UserContext} from '../../App';
 
-const EmotionSelector = ({user}) => {
+const EmotionSelector = () => {
+  const user = useContext(UserContext);
+
   const [currentEmotion, setEmotion] = useState(null);
   const timestamp = new Date();
 
